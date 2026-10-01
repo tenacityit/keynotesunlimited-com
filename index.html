@@ -9,19 +9,22 @@
 :root {
     /* Black: sampled from her logo background */
     --black: #000000;
-    --ink-900: #0a0a0a;
-    --ink-800: #141414;
-    --ink-700: #1f1f1f;
-    --ink-600: #2c2c2c;
 
-    /* Deep gold: sampled from her logo */
+    /* Deep gold: sampled from her logo. 700 is the darker shade used for text on light backgrounds */
     --gold-300: #e8c766;
     --gold-500: #c9a13b;
     --gold-700: #9a7420;
+    --gold-800: #7a5a14;
 
-    /* Text on black: a pale tint of the same gold hue */
+    /* Light page, near-black text */
+    --paper: #f1f0ee;
+    --white: #ffffff;
+    --line: #dedbd3;
+    --ink: #1a1a1a;
+    --ink-muted: #4a4742;
+
+    /* Text on the black logo panel and footer */
     --ivory: #efe6d0;
-    --ivory-muted: #b9ad8f;
 }
 
 * {
@@ -33,83 +36,69 @@
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     line-height: 1.6;
-    color: var(--ivory);
-    background-color: var(--ink-900);
+    color: var(--ink);
+    background-color: var(--paper);
 }
 
 .container {
+    position: relative;
+    z-index: 1;
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
 }
 
-/* Hero Section */
-.hero {
-    position: relative;
-    overflow: hidden;
-    background: var(--black);
-    color: var(--ivory);
-    padding: 50px 40px 70px;
-    text-align: center;
-    margin: 20px 0 60px;
-    border-radius: 8px;
-    border: 1px solid var(--gold-700);
-    border-bottom: 4px solid var(--gold-500);
-}
-
-.hero-content {
-    position: relative;
-}
-
-.hero-logo {
-    display: block;
-    width: min(560px, 90%);
-    height: auto;
-    margin: 0 auto 30px;
-    mix-blend-mode: screen;
-}
-
-.hero-diamonds {
-    position: absolute;
+/* Watermark: faint grey headshots tiled as diamonds over the whole page.
+   It sits behind the content, so the logo panel and headshots stay clean. */
+.watermark {
+    position: fixed;
     inset: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    opacity: 0.16;
-    filter: grayscale(1) sepia(1) saturate(1.4) contrast(1.1);
-    -webkit-mask-image: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.25) 0%, #000 85%);
-    mask-image: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.25) 0%, #000 85%);
+    z-index: 0;
+    overflow: hidden;
     pointer-events: none;
+    opacity: 0.07;
+    filter: grayscale(1) contrast(1.1);
+    mix-blend-mode: multiply;
 }
 
-.diamond-row {
-    display: flex;
-    flex-shrink: 0;
-}
-
-.diamond-row.offset {
-    margin: -85px 0;
-}
-
-.diamond-row span {
-    flex: 0 0 170px;
+.watermark span {
+    position: absolute;
+    width: 170px;
     height: 170px;
     background-size: cover;
     background-position: center 20%;
     clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
 }
 
+/* Hero Section */
+.hero {
+    background: var(--black);
+    color: var(--ivory);
+    padding: 36px 40px 50px;
+    text-align: center;
+    margin: 20px 0 60px;
+    border-radius: 8px;
+    border-bottom: 4px solid var(--gold-500);
+}
+
+.hero-logo {
+    display: block;
+    width: min(340px, 70%);
+    height: auto;
+    margin: 0 auto 24px;
+    mix-blend-mode: screen;
+}
+
 .hero h1 {
-    font-size: 2.8rem;
-    margin-bottom: 20px;
+    font-size: 2.4rem;
+    margin-bottom: 16px;
     font-weight: 700;
     letter-spacing: -1px;
     color: var(--gold-300);
 }
 
 .hero .tagline {
-    font-size: 1.2rem;
+    font-size: 1.15rem;
     max-width: 800px;
     margin: 0 auto;
     line-height: 1.8;
@@ -125,7 +114,7 @@ body {
     font-size: 2.5rem;
     margin-bottom: 50px;
     text-align: center;
-    color: var(--gold-300);
+    color: var(--ink);
 }
 
 .experts h2::after {
@@ -141,30 +130,30 @@ body {
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 40px;
     margin-bottom: 60px;
+    align-items: start;
 }
 
 .expert-card {
-    background: var(--ink-800);
-    border: 1px solid var(--ink-600);
+    background: rgba(255, 255, 255, 0.88);
+    border: 1px solid var(--line);
     border-top: 4px solid var(--gold-500);
     border-radius: 8px;
     overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
     transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
 .expert-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(201, 161, 59, 0.18);
-    border-top-color: var(--gold-300);
+    box-shadow: 0 8px 20px rgba(122, 90, 20, 0.2);
+    border-top-color: var(--gold-700);
 }
 
+/* Every headshot gets the same 4:5 portrait frame */
 .headshot-placeholder {
     width: 100%;
-    height: 300px;
-    background-color: var(--ink-700);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    aspect-ratio: 4 / 5;
+    background-color: var(--paper);
     overflow: hidden;
 }
 
@@ -173,31 +162,32 @@ body {
     height: 100%;
     object-fit: cover;
     object-position: center top;
+    display: block;
 }
 
 .expert-card h3 {
     font-size: 1.5rem;
     padding: 25px 25px 10px;
-    color: var(--gold-300);
+    color: var(--ink);
 }
 
 .expert-card h4 {
     padding: 0 25px 8px;
     font-size: 1.05rem;
-    color: var(--gold-500);
+    color: var(--gold-800);
 }
 
 .expert-card .bio {
     padding: 0 25px 20px;
     font-size: 0.95rem;
-    color: var(--ivory-muted);
+    color: var(--ink-muted);
     line-height: 1.6;
 }
 
 .expert-card .bio-list {
     padding: 0 25px 20px 45px;
     font-size: 0.95rem;
-    color: var(--ivory-muted);
+    color: var(--ink-muted);
     line-height: 1.6;
 }
 
@@ -206,28 +196,28 @@ body {
 }
 
 .expert-card a {
-    color: var(--gold-300);
+    color: var(--gold-800);
 }
 
 .expert-card .topics {
     padding: 0 25px 20px;
     font-size: 0.9rem;
-    color: var(--ivory-muted);
+    color: var(--ink-muted);
     line-height: 1.6;
 }
 
 .expert-card .topics strong {
-    color: var(--gold-500);
+    color: var(--gold-800);
 }
 
 .video-placeholder {
-    background-color: var(--ink-700);
+    background-color: var(--paper);
     border: 1px dashed var(--gold-700);
     margin: 0 25px 25px;
     padding: 40px 20px;
     text-align: center;
     border-radius: 4px;
-    color: var(--ivory-muted);
+    color: var(--ink-muted);
     font-size: 0.9rem;
     min-height: 200px;
     display: flex;
@@ -238,26 +228,27 @@ body {
 /* Services Sections */
 .services {
     margin-bottom: 80px;
-    background: var(--ink-800);
-    border: 1px solid var(--ink-600);
+    background: rgba(255, 255, 255, 0.88);
+    border: 1px solid var(--line);
     padding: 60px 40px;
     border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
 .services h2 {
     font-size: 2rem;
     margin-bottom: 30px;
-    color: var(--gold-300);
+    color: var(--ink);
 }
 
 .service-content {
     font-size: 1.1rem;
     line-height: 1.8;
-    color: var(--ivory-muted);
+    color: var(--ink-muted);
 }
 
 .services.keynotes {
-    border-left: 5px solid var(--gold-300);
+    border-left: 5px solid var(--gold-500);
 }
 
 .services.coaching {
@@ -268,10 +259,10 @@ body {
 .signature {
     background: var(--black);
     color: var(--ivory);
-    border: 1px solid var(--gold-700);
     padding: 60px 40px;
     text-align: center;
     border-radius: 8px;
+    border-bottom: 4px solid var(--gold-500);
     margin-bottom: 40px;
 }
 
@@ -287,25 +278,24 @@ body {
 }
 
 .signature a {
-    color: var(--gold-500);
+    color: var(--gold-300);
     text-decoration: none;
     font-weight: 500;
 }
 
 .signature a:hover {
-    color: var(--gold-300);
     text-decoration: underline;
 }
 
 /* Responsive */
 @media (max-width: 768px) {
     .hero {
-        padding: 30px 20px 50px;
+        padding: 28px 20px 40px;
         margin-bottom: 40px;
     }
 
     .hero h1 {
-        font-size: 2rem;
+        font-size: 1.9rem;
     }
 
     .hero .tagline {
@@ -337,16 +327,10 @@ body {
     </style>
 </head>
 <body>
+    <div class="watermark" aria-hidden="true"></div>
     <div class="container">
         <!-- Hero Section -->
         <header class="hero">
-        <div class="hero-diamonds" aria-hidden="true">
-            <div class="diamond-row"><span style="background-image:url(joanne-headshot.jpg)"></span><span style="background-image:url(summer-headshot.jpg)"></span><span style="background-image:url(linda-headshot.jpg)"></span><span style="background-image:url(terry-headshot.jpg)"></span><span style="background-image:url(joanne-headshot.jpg)"></span><span style="background-image:url(summer-headshot.jpg)"></span><span style="background-image:url(linda-headshot.jpg)"></span><span style="background-image:url(terry-headshot.jpg)"></span></div>
-            <div class="diamond-row offset"><span style="background-image:url(joanne-headshot.jpg)"></span><span style="background-image:url(summer-headshot.jpg)"></span><span style="background-image:url(linda-headshot.jpg)"></span><span style="background-image:url(terry-headshot.jpg)"></span><span style="background-image:url(joanne-headshot.jpg)"></span><span style="background-image:url(summer-headshot.jpg)"></span><span style="background-image:url(linda-headshot.jpg)"></span></div>
-            <div class="diamond-row"><span style="background-image:url(terry-headshot.jpg)"></span><span style="background-image:url(joanne-headshot.jpg)"></span><span style="background-image:url(summer-headshot.jpg)"></span><span style="background-image:url(linda-headshot.jpg)"></span><span style="background-image:url(terry-headshot.jpg)"></span><span style="background-image:url(joanne-headshot.jpg)"></span><span style="background-image:url(summer-headshot.jpg)"></span><span style="background-image:url(linda-headshot.jpg)"></span></div>
-            <div class="diamond-row offset"><span style="background-image:url(terry-headshot.jpg)"></span><span style="background-image:url(joanne-headshot.jpg)"></span><span style="background-image:url(summer-headshot.jpg)"></span><span style="background-image:url(linda-headshot.jpg)"></span><span style="background-image:url(terry-headshot.jpg)"></span><span style="background-image:url(joanne-headshot.jpg)"></span><span style="background-image:url(summer-headshot.jpg)"></span></div>
-            <div class="diamond-row"><span style="background-image:url(linda-headshot.jpg)"></span><span style="background-image:url(terry-headshot.jpg)"></span><span style="background-image:url(joanne-headshot.jpg)"></span><span style="background-image:url(summer-headshot.jpg)"></span><span style="background-image:url(linda-headshot.jpg)"></span><span style="background-image:url(terry-headshot.jpg)"></span><span style="background-image:url(joanne-headshot.jpg)"></span><span style="background-image:url(summer-headshot.jpg)"></span></div>
-        </div>
             <div class="hero-content">
                 <img class="hero-logo" src="logo.jpg" alt="Keynotes and Coaching Unlimited">
                 <h1>Elevate Your Next Event</h1>
@@ -361,9 +345,9 @@ body {
                 <!-- Expert 1: Joanne -->
                 <div class="expert-card">
                     <div class="headshot-placeholder">
-                        <img src="joanne-headshot.jpg" alt="Joanne Smikle" class="headshot">
+                        <img src="joanne-headshot.jpg" alt="Joanne L. Smikle, PhD" class="headshot">
                     </div>
-                    <h3>Joanne Smikle</h3>
+                    <h3>Joanne L. Smikle, PhD</h3>
                     <p class="bio">Dr. Joanne L. Smikle, a respected authority on leadership and organization development, provides keynotes, workshops, and retreats. She prepares leaders for an ever-evolving world.</p>
                     <h4>Why select Joanne?</h4>
                     <ul class="bio-list">
@@ -373,18 +357,18 @@ body {
                     </ul>
                     <p class="bio">Joanne’s keynotes are always curated to the needs of each client. She designs based on client needs and event themes. Here are a few of the most recent keynotes she’s delivered:</p>
                     <ul class="bio-list">
-                        <li>Hassles to Hope</li>
-                        <li>Why They Stay…Retention &amp; Engagement</li>
-                        <li>Appreciative Inquiry: Tools for Transforming the Enterprise</li>
+                        <li><em>Hassles to Hope</em></li>
+                        <li><em>Why They Stay…Retention &amp; Engagement</em></li>
+                        <li><em>Appreciative Inquiry: Tools for Transforming the Enterprise</em></li>
                     </ul>
                     <p class="bio">Leaders love her keynotes and workshops because when Smikle Speaks minds move!</p>
                     <p class="bio">Joanne’s thought leadership contributes to the body of practical, usable knowledge.</p>
                     <ul class="bio-list">
-                        <li>Her insights are available on The SmikleSpeaks Podcast. The podcast is ranked #1 by FeedSpot on the 10 Best Organization Development Podcasts for 2025 and 2026</li>
+                        <li>Her insights are available on The SmikleSpeaks Podcast. This #1 ranked podcast is heard in 24 countries by over 30,000 listeners</li>
                         <li>Tune in to her YouTube Channel for virtual leadership learning</li>
                         <li>She’s authored over 100 published articles that provide actionable knowledge for leaders. These works are featured in both peer-reviewed and practitioner publications. They are available in the library on <a href="http://smiklespeaks.com/">smiklespeaks.com</a></li>
                     </ul>
-                    <p class="bio">Her greatest professional joy comes from helping organizations, through their leaders, maximize their gifts. She also offers customized services that go beyond coaching for individuals interested in focusing on their career trajectories.</p>
+                    <p class="bio">Her greatest professional joy comes from helping organizations, through their leaders, excel. She also offers individual leadership development that goes beyond coaching. This service is for people wanting to write their next chapter or accelerate their trajectories.</p>
                     <div class="video-placeholder">
                         <p>Video embed</p>
                     </div>
@@ -463,11 +447,33 @@ body {
 
         <!-- Signature Footer -->
         <footer class="signature">
-            <p class="statement">Elevate your next event with a captivating, action-oriented keynote. Elevate your career trajectory with curated coaching.</p>
+            <p class="statement">Take your events to the next level with our speakers. Take your career to the next level with our coaches.</p>
             <p class="domains">
                 <a href="https://keynotesunlimited.com">keynotesunlimited.com</a>
             </p>
         </footer>
     </div>
+    <script>
+    // Tile the page with faint diamond headshots (a watermark). Rebuilds on resize.
+    (function () {
+        var photos = ['joanne-1', 'summer', 'joanne-4', 'linda', 'joanne-6', 'joanne-2', 'joanne-5', 'joanne-3']
+            .map(function (n) { return 'backdrop/' + n + '.jpg'; });
+        var D = 170, box = document.querySelector('.watermark');
+        function build() {
+            var w = window.innerWidth, h = window.innerHeight, html = '';
+            var rows = Math.ceil(h / (D / 2)) + 2, cols = Math.ceil(w / D) + 2;
+            for (var r = 0; r < rows; r++) {
+                for (var c = 0; c < cols; c++) {
+                    var x = c * D + (r % 2 ? D / 2 : 0) - D / 2, y = r * (D / 2) - D / 2;
+                    var img = photos[(c * 3 + r * 5) % photos.length];
+                    html += '<span style="left:' + x + 'px;top:' + y + 'px;background-image:url(' + img + ')"></span>';
+                }
+            }
+            box.innerHTML = html;
+        }
+        var t; window.addEventListener('resize', function () { clearTimeout(t); t = setTimeout(build, 150); });
+        build();
+    })();
+    </script>
 </body>
 </html>
