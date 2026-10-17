@@ -172,6 +172,21 @@ body {
     color: var(--ink);
 }
 
+.profile-link {
+    display: block;
+    height: 100%;
+}
+
+.expert-card h3 a.name-link {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 2px solid var(--gold-500);
+}
+
+.expert-card h3 a.name-link:hover {
+    color: var(--gold-800);
+}
+
 .expert-card h4 {
     padding: 0 25px 8px;
     font-size: 1.05rem;
@@ -443,9 +458,9 @@ body {
                 <!-- Expert 1: Joanne -->
                 <div class="expert-card">
                     <div class="headshot-placeholder">
-                        <img src="joanne-headshot.jpg" alt="Joanne L. Smikle, PhD" class="headshot">
+                        <a class="profile-link" href="https://joanne.keynotesunlimited.com" aria-label="See Joanne L. Smikle's page: videos, podcast and more"><img src="joanne-headshot.jpg" alt="Joanne L. Smikle, PhD" class="headshot"></a>
                     </div>
-                    <h3>Joanne L. Smikle, PhD</h3>
+                    <h3><a class="name-link" href="https://joanne.keynotesunlimited.com">Joanne L. Smikle, PhD</a></h3>
                     <p class="bio">Dr. Joanne L. Smikle, a respected authority on leadership and organization development, provides keynotes, workshops, and retreats. She prepares leaders for an ever-evolving world.</p>
                     <h4>Why select Joanne?</h4>
                     <ul class="bio-list">
