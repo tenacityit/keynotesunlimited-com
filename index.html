@@ -121,8 +121,9 @@ body {
 .experts h2::after {
     content: "\25C6";
     display: block;
-    margin-top: 10px;
-    font-size: 0.9rem;
+    margin-top: 6px;
+    font-size: 3rem;
+    line-height: 1;
     color: var(--gold-500);
 }
 
@@ -132,6 +133,16 @@ body {
     gap: 40px;
     margin-bottom: 60px;
     align-items: start;
+}
+
+.services-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.expert-card.col-right {
+    grid-column: 3;
 }
 
 .expert-card {
@@ -245,7 +256,7 @@ body {
     background: var(--black);
 }
 
-.video-embed iframe {
+.video-embed iframe, .video-embed video {
     width: 100%;
     height: 100%;
     border: 0;
@@ -401,6 +412,12 @@ body {
 }
 
 /* Responsive */
+@media (max-width: 980px) {
+    .expert-card.col-right {
+        grid-column: auto;
+    }
+}
+
 @media (max-width: 768px) {
     .hero {
         padding: 28px 20px 40px;
@@ -483,11 +500,14 @@ body {
                     </ul>
                     <p class="bio">Her greatest professional joy comes from helping organizations, through their leaders, excel. She also offers individual leadership development that goes beyond coaching. This service is for people wanting to write their next chapter or accelerate their trajectories.</p>
                     <div class="video-embed">
-                        <iframe src="https://www.youtube-nocookie.com/embed/VCRQF9OSBjA?rel=0" title="Joanne L. Smikle, PhD: Real Strategies. Real Impact. (demo reel)" loading="lazy" allow="accelerometer; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+                        <video controls preload="metadata" poster="video/demo-reel-a-poster.jpg" playsinline>
+                            <source src="video/demo-reel-a.mp4" type="video/mp4">
+                        </video>
                     </div>
                 </div>
 
-                <!-- Keynotes, between Joanne and Summer -->
+                <div class="services-stack">
+                <!-- Keynotes and Coaching, stacked between Joanne and Summer -->
                 <section class="services keynotes">
             <h2>Keynotes</h2>
             <div class="service-content">
@@ -509,6 +529,31 @@ body {
                 <p>They bring content that’s relevant, memorable, and actionable. The goal is simple: your audience should leave not only inspired, but ready to do something differently.</p>
             </div>
         </section>
+                <section class="services coaching">
+            <h2>Coaching</h2>
+            <div class="service-content">
+                <p>Exceptional leaders are always growing, evolving, and finding new ways to create meaningful impact. A great coach provides personalized guidance, honest perspective, and practical strategies designed to help leaders maximize their impact.</p>
+                <p>Each coach approaches the assignment differently, based on their unique style. Yet they all will help you…</p>
+                <ul>
+                    <li>Assess your trajectory</li>
+                    <li>Navigate challenging situations</li>
+                    <li>Understand the nuances of organizational politics</li>
+                    <li>Refine and achieve professional goals</li>
+                    <li>Lead with gravitas</li>
+                </ul>
+                <p>Through a focused, collaborative coaching experience, executives gain greater clarity, expand their capabilities, and develop the confidence to lead with intention and influence.</p>
+                <p>Whether you are stepping into a new leadership role, dealing with organizational change, or examining what your next level of success will be, executive coaching provides the support to help you lead at your very best.</p>
+                <p>Not only is there coaching for individuals, but also for teams and workgroups. This is the type of organizational support that builds bench strength throughout the enterprise.</p>
+                <p>Use it to…</p>
+                <ul>
+                    <li>Improve team dynamics</li>
+                    <li>Build more effective processes</li>
+                    <li>Spark innovation and entrepreneurial thinking</li>
+                    <li>Enhance collaboration and outcomes</li>
+                </ul>
+            </div>
+        </section>
+                </div>
 
 <!-- Expert 2: Summer -->
                 <div class="expert-card">
@@ -542,7 +587,9 @@ body {
                         <li>Neurodivergence in the Workplace</li>
                         <li>Quality Leaders = Quality Culture</li>
                     </ul>
-                    <a class="video-link" href="https://vimeo.com/922495012" target="_blank" rel="noopener">▶ Watch Summer’s speaker reel</a>
+                    <div class="video-embed">
+                        <iframe src="https://player.vimeo.com/video/922495012" title="Summer Jelinek speaker reel" loading="lazy" allow="fullscreen; picture-in-picture" allowfullscreen></iframe>
+                    </div>
                 </div>
 
 <!-- Expert 4: Terry -->
@@ -586,34 +633,9 @@ body {
                     </div>
                 </div>
 
-                <!-- Coaching, between Terry and Linda -->
-                <section class="services coaching">
-            <h2>Coaching</h2>
-            <div class="service-content">
-                <p>Exceptional leaders are always growing, evolving, and finding new ways to create meaningful impact. A great coach provides personalized guidance, honest perspective, and practical strategies designed to help leaders maximize their impact.</p>
-                <p>Each coach approaches the assignment differently, based on their unique style. Yet they all will help you…</p>
-                <ul>
-                    <li>Assess your trajectory</li>
-                    <li>Navigate challenging situations</li>
-                    <li>Understand the nuances of organizational politics</li>
-                    <li>Refine and achieve professional goals</li>
-                    <li>Lead with gravitas</li>
-                </ul>
-                <p>Through a focused, collaborative coaching experience, executives gain greater clarity, expand their capabilities, and develop the confidence to lead with intention and influence.</p>
-                <p>Whether you are stepping into a new leadership role, dealing with organizational change, or examining what your next level of success will be, executive coaching provides the support to help you lead at your very best.</p>
-                <p>Not only is there coaching for individuals, but also for teams and workgroups. This is the type of organizational support that builds bench strength throughout the enterprise.</p>
-                <p>Use it to…</p>
-                <ul>
-                    <li>Improve team dynamics</li>
-                    <li>Build more effective processes</li>
-                    <li>Spark innovation and entrepreneurial thinking</li>
-                    <li>Enhance collaboration and outcomes</li>
-                </ul>
-            </div>
-        </section>
 
 <!-- Expert 3: Linda -->
-                <div class="expert-card">
+                <div class="expert-card col-right">
                     <div class="headshot-placeholder">
                         <a class="profile-link" href="https://linda.keynotesunlimited.com" aria-label="See Linda's page: videos and more"><img src="linda-headshot.jpg" alt="Linda Roszak Burton" class="headshot"></a>
                     </div>
