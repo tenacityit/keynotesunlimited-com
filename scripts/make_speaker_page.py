@@ -32,7 +32,7 @@ SPEAKERS = {
         lead="A leadership keynote speaker, consultant, and educator with more than two decades of leadership experience at organizations including Walt Disney World, the Disney Institute, H-E-B/Central Market, and the Center for Creative Leadership.",
         hero="summer-headshot.jpg", marks=["summer-headshot.jpg", "backdrop/summer.jpg"],
         extra_imgs=["summer-book.png"],
-        reel_vimeo="922495012",
+        featured_yt=("56LHLCRSTec", "Summer Jelinek speaker reel"), facade=True,
         yt_heading="Popular Content from Summer&rsquo;s YouTube Channel",
         yt_channel="https://www.youtube.com/@SummerJelinek",
         videos=[yt("ZHXT1LfJE9U", "The Real ADHD Leadership Guide You&rsquo;ve Been Looking For"),
@@ -178,6 +178,26 @@ SPEAKERS = {
 }
 
 
+FACADE = '<button class="yt-facade" type="button" data-id="{i}" data-title="{t}" aria-label="Play: {t}"><img src="https://i.ytimg.com/vi/{i}/maxresdefault.jpg" alt=""><span class="play-btn">&#9654;</span></button>'
+
+FACADE_CSS = """
+.yt-facade { position: relative; display: block; width: 100%; height: 100%; padding: 0; border: 0; cursor: pointer; background: #000; }
+.yt-facade img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.yt-facade .play-btn { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 68px; height: 68px; border-radius: 50%; background: rgba(0,0,0,.65); border: 2px solid var(--gold-300); color: var(--gold-300); display: flex; align-items: center; justify-content: center; font-size: 26px; padding-left: 4px; transition: background .2s, color .2s; }
+.yt-facade:hover .play-btn, .yt-facade:focus-visible .play-btn { background: var(--gold-500); color: #000; }
+"""
+
+FACADE_JS = """
+        document.addEventListener('click', function (e) {
+            var b = e.target.closest('.yt-facade'); if (!b) return;
+            var f = document.createElement('iframe');
+            f.src = 'https://www.youtube-nocookie.com/embed/' + b.dataset.id + '?autoplay=1&rel=0&modestbranding=1&playsinline=1&iv_load_policy=3';
+            f.title = b.dataset.title; f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen'; f.allowFullscreen = true;
+            b.replaceWith(f);
+        });
+"""
+
+
 def card(i, t):
     return f'''                <a class="vid" href="https://www.youtube.com/watch?v={i}" data-id="{i}" target="_blank" rel="noopener">
                     <div class="thumb"><img loading="lazy" src="https://i.ytimg.com/vi/{i}/hqdefault.jpg" alt=""><span class="play">&#9654;</span></div>
@@ -206,6 +226,8 @@ def build(slug, c):
 
     jh = (JOANNE / "index.html").read_text()
     css = re.search(r"<style>.*?</style>", jh, re.S).group(0)
+    if c.get("facade"):
+        css = css.replace("</style>", FACADE_CSS + "</style>")
     plain_name = html.unescape(re.sub(r"<[^>]+>", "", c["name"]))
     page_title = html.escape(c["title"]).replace("&amp;", "&")
     desc = html.escape(c["description"], quote=True)
@@ -226,7 +248,7 @@ def build(slug, c):
 </head>
 '''
     has_pod = bool(c["podcast"])
-    has_vid = bool(c.get("reel_vimeo") or c.get("featured_yt") or c["videos"])
+    has_vid = bool(c.get("featured_yt") or c["videos"])
     nav = ""
     if has_vid:
         nav += '                <a href="#videos">Videos</a>\n'
@@ -270,18 +292,15 @@ def build(slug, c):
 '''
     if has_vid:
         body += '        <section class="block" id="videos">\n            <h2 class="title">Watch ' + c["first"] + '</h2>\n'
-        if c.get("reel_vimeo"):
-            body += f'''            <div class="featured">
-                <div class="embed">
-                    <iframe src="https://player.vimeo.com/video/{c["reel_vimeo"]}" title="{html.escape(plain_name)} speaker reel" loading="lazy" allow="fullscreen; picture-in-picture" allowfullscreen></iframe>
-                </div>
-            </div>
-'''
         if c.get("featured_yt"):
             i, t = c["featured_yt"]
+            if c.get("facade"):
+                inner = FACADE.format(i=i, t=html.escape(t, quote=True))
+            else:
+                inner = f'<iframe src="https://www.youtube-nocookie.com/embed/{i}?rel=0" title="{html.escape(t)}" loading="lazy" allow="accelerometer; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>'
             body += f'''            <div class="featured">
                 <div class="embed">
-                    <iframe src="https://www.youtube-nocookie.com/embed/{i}?rel=0" title="{html.escape(t)}" loading="lazy" allow="accelerometer; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>
+                    {inner}
                 </div>
             </div>
 '''

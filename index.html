@@ -263,6 +263,11 @@ body {
     display: block;
 }
 
+.yt-facade { position: relative; display: block; width: 100%; height: 100%; padding: 0; border: 0; cursor: pointer; background: #000; }
+.yt-facade img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.yt-facade .play-btn { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 68px; height: 68px; border-radius: 50%; background: rgba(0,0,0,.65); border: 2px solid var(--gold-300); color: var(--gold-300); display: flex; align-items: center; justify-content: center; font-size: 26px; padding-left: 4px; transition: background .2s, color .2s; }
+.yt-facade:hover .play-btn, .yt-facade:focus-visible .play-btn { background: var(--gold-500); color: #000; }
+
 .video-link {
     display: block;
     margin: 0 25px 25px;
@@ -588,7 +593,7 @@ body {
                         <li>Quality Leaders = Quality Culture</li>
                     </ul>
                     <div class="video-embed">
-                        <iframe src="https://www.youtube-nocookie.com/embed/56LHLCRSTec?rel=0" title="Summer Jelinek speaker reel" loading="lazy" allow="accelerometer; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>
+                        <button class="yt-facade" type="button" data-id="56LHLCRSTec" data-title="Summer Jelinek speaker reel" aria-label="Play: Summer Jelinek speaker reel"><img src="https://i.ytimg.com/vi/56LHLCRSTec/maxresdefault.jpg" alt=""><span class="play-btn">&#9654;</span></button>
                     </div>
                 </div>
 
@@ -618,7 +623,6 @@ body {
                         <li>Certificate in leadership coaching from Georgetown University</li>
                         <li>Certificate in change management from Johns Hopkins University</li>
                         <li>Certificate in the neuroscience of leadership from Harvard Medical School</li>
-                        <li>Certificate in leading diversity, equity, and inclusion from Northwestern University</li>
                     </ul>
                     <p class="bio">She brings a background in finance and operations, and is certified in Hogan, Gallup Strengths, and the Leadership Circles assessments and is a Diversity and Belonging Facilitator through Culture Veritas.</p>
                     <h4>Key topics</h4>
@@ -687,6 +691,14 @@ body {
         </footer>
     </div>
     <script>
+    document.addEventListener('click', function (e) {
+            var b = e.target.closest('.yt-facade'); if (!b) return;
+            var f = document.createElement('iframe');
+            f.src = 'https://www.youtube-nocookie.com/embed/' + b.dataset.id + '?autoplay=1&rel=0&modestbranding=1&playsinline=1&iv_load_policy=3';
+            f.title = b.dataset.title; f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen'; f.allowFullscreen = true;
+            b.replaceWith(f);
+        });
+
     // Tile the page with faint diamond headshots (a watermark). Rebuilds on resize.
     (function () {
         var photos = ['joanne-1', 'summer', 'terry', 'joanne-4', 'linda', 'joanne-6', 'joanne-2', 'terry', 'joanne-5', 'joanne-3']
