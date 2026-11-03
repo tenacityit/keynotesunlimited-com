@@ -37,55 +37,37 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     line-height: 1.6;
     color: var(--ink);
-    background-color: var(--paper);
+    background-color: var(--black);
 }
 
 .container {
     position: relative;
     z-index: 1;
-    max-width: 1200px;
+    max-width: 1600px;
     margin: 0 auto;
     padding: 0 20px;
-}
-
-/* Watermark: faint grey headshots tiled as diamonds over the whole page.
-   It sits behind the content, so the logo panel and headshots stay clean. */
-.watermark {
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    overflow: hidden;
-    pointer-events: none;
-    opacity: 0.07;
-    filter: grayscale(1) contrast(1.1);
-    mix-blend-mode: multiply;
-}
-
-.watermark span {
-    position: absolute;
-    width: 170px;
-    height: 170px;
-    background-size: cover;
-    background-position: center 20%;
-    clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
 }
 
 /* Hero Section */
 .hero {
     background: var(--black);
     color: var(--ivory);
-    padding: 36px 40px 50px;
+    padding: 20px 20px 24px;
     text-align: center;
-    margin: 20px 0 60px;
-    border-radius: 8px;
+    margin: 0;
+}
+
+.hero.intro {
+    padding: 50px 20px 60px;
+    margin-bottom: 40px;
     border-bottom: 4px solid var(--gold-500);
 }
 
 .hero-logo {
     display: block;
-    width: min(340px, 70%);
+    width: min(220px, 60%);
     height: auto;
-    margin: 0 auto 24px;
+    margin: 0 auto;
     mix-blend-mode: screen;
 }
 
@@ -108,29 +90,13 @@ body {
 
 /* Experts Section */
 .experts {
-    margin-bottom: 80px;
-}
-
-.experts h2 {
-    font-size: 2.5rem;
-    margin-bottom: 50px;
-    text-align: center;
-    color: var(--ink);
-}
-
-.experts h2::after {
-    content: "\25C6";
-    display: block;
-    margin-top: 6px;
-    font-size: 3rem;
-    line-height: 1;
-    color: var(--gold-500);
+    margin-bottom: 0;
 }
 
 .experts-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 24px;
+    gap: 2px;
     margin-bottom: 40px;
     align-items: start;
 }
@@ -146,9 +112,8 @@ body {
     background: rgba(255, 255, 255, 0.88);
     border: 1px solid var(--line);
     border-top: 4px solid var(--gold-500);
-    border-radius: 8px;
+    border-radius: 0;
     overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
     transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
@@ -480,15 +445,17 @@ body {
         font-size: 1.05rem;
     }
 
-    .experts h2,
     .services h2 {
         font-size: 1.8rem;
     }
 
-    .experts-grid,
     .services-stack {
         grid-template-columns: 1fr;
         gap: 30px;
+    }
+
+    .experts-grid {
+        grid-template-columns: 1fr;
     }
 
     .experts-grid {
@@ -510,20 +477,14 @@ body {
     </style>
 </head>
 <body>
-    <div class="watermark" aria-hidden="true"></div>
     <div class="container">
-        <!-- Hero Section -->
+        <!-- Logo -->
         <header class="hero">
-            <div class="hero-content">
-                <img class="hero-logo" src="logo.jpg" alt="Keynotes and Coaching Unlimited">
-                <h1>Elevate Your Next Event</h1>
-                <p class="tagline">Elevate your next event with a captivating, action-oriented keynote. Elevate your career trajectory with curated coaching. Four nationally respected experts are available to provide both services.</p>
-            </div>
+            <img class="hero-logo" src="logo.jpg" alt="Keynotes and Coaching Unlimited">
         </header>
 
         <!-- Experts Grid -->
         <section class="experts">
-            <h2>Our Experts</h2>
             <div class="experts-grid">
 <!-- Expert 1: Joanne -->
                 <div class="expert-card">
@@ -685,6 +646,12 @@ body {
                 </div>
             </div>
 
+        <!-- Intro, below the pictures -->
+        <section class="hero intro">
+            <h1>Elevate Your Next Event</h1>
+            <p class="tagline">Elevate your next event with a captivating, action-oriented keynote. Elevate your career trajectory with curated coaching. Four nationally respected experts are available to provide both services.</p>
+        </section>
+
             <!-- Keynotes and Coaching, two even columns below the speakers -->
                 <div class="services-stack">
                 
@@ -764,26 +731,6 @@ body {
             b.replaceWith(f);
         });
 
-    // Tile the page with faint diamond headshots (a watermark). Rebuilds on resize.
-    (function () {
-        var photos = ['joanne-1', 'summer', 'terry', 'joanne-4', 'linda', 'joanne-6', 'joanne-2', 'terry', 'joanne-5', 'joanne-3']
-            .map(function (n) { return 'backdrop/' + n + '.jpg'; });
-        var D = 170, box = document.querySelector('.watermark');
-        function build() {
-            var w = window.innerWidth, h = window.innerHeight, html = '';
-            var rows = Math.ceil(h / (D / 2)) + 2, cols = Math.ceil(w / D) + 2;
-            for (var r = 0; r < rows; r++) {
-                for (var c = 0; c < cols; c++) {
-                    var x = c * D + (r % 2 ? D / 2 : 0) - D / 2, y = r * (D / 2) - D / 2;
-                    var img = photos[(c * 3 + r * 5) % photos.length];
-                    html += '<span style="left:' + x + 'px;top:' + y + 'px;background-image:url(' + img + ')"></span>';
-                }
-            }
-            box.innerHTML = html;
-        }
-        var t; window.addEventListener('resize', function () { clearTimeout(t); t = setTimeout(build, 150); });
-        build();
-    })();
     </script>
 </body>
 </html>
