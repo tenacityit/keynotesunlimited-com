@@ -63,14 +63,6 @@ body {
     border-bottom: 4px solid var(--gold-500);
 }
 
-.hero-logo {
-    display: block;
-    width: min(220px, 60%);
-    height: auto;
-    margin: 0 auto;
-    mix-blend-mode: screen;
-}
-
 .hero h1 {
     font-size: 2.4rem;
     margin-bottom: 16px;
@@ -91,6 +83,24 @@ body {
 /* Experts Section */
 .experts {
     margin-bottom: 0;
+}
+
+.experts-stage {
+    position: relative;
+}
+
+/* The logo is a transparent layer floating over the seam between Summer and Terry.
+   pointer-events: none keeps the hover accordion working underneath it. */
+.float-logo {
+    position: absolute;
+    z-index: 5;
+    left: 50%;
+    top: min(14vw, 224px);
+    width: min(25vw, 400px);
+    height: auto;
+    transform: translateX(-50%);
+    pointer-events: none;
+    filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.6)) drop-shadow(0 0 16px rgba(0, 0, 0, 0.35));
 }
 
 .experts-grid {
@@ -429,6 +439,11 @@ body {
     .experts-grid {
         grid-template-columns: repeat(2, 1fr);
     }
+
+    .float-logo {
+        top: 40vw;
+        width: min(34vw, 360px);
+    }
 }
 
 @media (max-width: 768px) {
@@ -458,6 +473,15 @@ body {
         grid-template-columns: 1fr;
     }
 
+    .float-logo {
+        position: static;
+        display: block;
+        width: min(260px, 70%);
+        margin: 16px auto;
+        transform: none;
+        filter: none;
+    }
+
     .experts-grid {
         margin-bottom: 30px;
     }
@@ -478,13 +502,10 @@ body {
 </head>
 <body>
     <div class="container">
-        <!-- Logo -->
-        <header class="hero">
-            <img class="hero-logo" src="logo.jpg" alt="Keynotes and Coaching Unlimited">
-        </header>
-
         <!-- Experts Grid -->
         <section class="experts">
+            <div class="experts-stage">
+            <img class="float-logo" src="logo-float.png" alt="Keynotes and Coaching Unlimited">
             <div class="experts-grid">
 <!-- Expert 1: Joanne -->
                 <div class="expert-card">
@@ -526,7 +547,7 @@ body {
 <!-- Expert 2: Summer -->
                 <div class="expert-card">
                     <div class="headshot-placeholder">
-                        <a class="profile-link" href="https://summer.keynotesunlimited.com" aria-label="See Summer Jelinek's page: videos, podcast and more"><img src="summer-headshot.jpg" alt="Summer Jelinek" class="headshot"></a>
+                        <a class="profile-link" href="https://summer.keynotesunlimited.com" aria-label="See Summer Jelinek's page: videos, podcast and more"><img src="summer-headshot-grey.jpg" alt="Summer Jelinek" class="headshot"></a>
                     </div>
                     <h3><a class="name-link" href="https://summer.keynotesunlimited.com">Summer Jelinek</a></h3>
                     <button class="more-toggle" type="button" aria-expanded="false">Read more <span aria-hidden="true">&#9662;</span></button>
@@ -644,6 +665,7 @@ body {
                     </div>
                     </div></div>
                 </div>
+            </div>
             </div>
 
         <!-- Intro, below the pictures -->
