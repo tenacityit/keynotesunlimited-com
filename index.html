@@ -103,6 +103,7 @@ body {
     /* One size drives both the logo and the white band behind it (logo aspect ratio is 0.557) */
     --logo-w: min(26vw, 420px);
     --band: calc(var(--logo-w) * 0.557 + 12px);
+    --g-mid: #5a5751;
 }
 
 /* The logo is a transparent layer floating over the seam between Summer and Terry.
@@ -148,9 +149,10 @@ body {
     content: "";
     display: block;
     height: var(--band);
-    /* Lightest where it meets the speakers, darkening upward and fully black by the top of the logo,
-       so the logo's dark edges melt into the background */
-    background: linear-gradient(0deg, #ffffff 0%, #cfcdc8 4%, #8c8982 9%, #4a4843 18%, #181715 32%, #000000 50%, #000000 100%);
+    margin-bottom: -1px;   /* overlap by a pixel so no hairline shows at the join */
+    /* Top half of one continuous gradient: black behind the logo, easing to --g-mid where
+       the photo area picks up (see .headshot-placeholder) */
+    background: linear-gradient(0deg, var(--g-mid) 0%, #3d3b37 10%, #161513 30%, #000000 55%, #000000 100%);
 }
 
 .expert-card:hover {
@@ -163,7 +165,8 @@ body {
 .headshot-placeholder {
     width: 100%;
     aspect-ratio: 4 / 5;
-    background-color: var(--paper);
+    /* Gradient behind the speakers: continues from the band and lightens down the photo */
+    background: linear-gradient(180deg, var(--g-mid) 0%, #8f8c86 20%, #bebcb7 42%, #e2e1de 68%, #ffffff 100%);
     overflow: hidden;
 }
 
@@ -568,7 +571,7 @@ body {
 <!-- Expert 1: Joanne -->
                 <div class="expert-card">
                     <div class="headshot-placeholder">
-                        <a class="profile-link" href="https://joanne.keynotesunlimited.com" aria-label="See Joanne L. Smikle's page: videos, podcast and more"><img src="joanne-headshot.jpg" alt="Joanne L. Smikle, PhD" class="headshot"></a>
+                        <a class="profile-link" href="https://joanne.keynotesunlimited.com" aria-label="See Joanne L. Smikle's page: videos, podcast and more"><img src="joanne-cut.webp" alt="Joanne L. Smikle, PhD" class="headshot"></a>
                     </div>
                     <h3><a class="name-link" href="https://joanne.keynotesunlimited.com">Joanne L. Smikle, PhD</a></h3>
                     <button class="more-toggle" type="button" aria-expanded="false">Read more <span aria-hidden="true">&#9662;</span></button>
@@ -605,7 +608,7 @@ body {
 <!-- Expert 2: Summer -->
                 <div class="expert-card">
                     <div class="headshot-placeholder">
-                        <a class="profile-link" href="https://summer.keynotesunlimited.com" aria-label="See Summer Jelinek's page: videos, podcast and more"><img src="summer-headshot-white.jpg" alt="Summer Jelinek" class="headshot"></a>
+                        <a class="profile-link" href="https://summer.keynotesunlimited.com" aria-label="See Summer Jelinek's page: videos, podcast and more"><img src="summer-cut.webp" alt="Summer Jelinek" class="headshot"></a>
                     </div>
                     <h3><a class="name-link" href="https://summer.keynotesunlimited.com">Summer Jelinek</a></h3>
                     <button class="more-toggle" type="button" aria-expanded="false">Read more <span aria-hidden="true">&#9662;</span></button>
@@ -645,7 +648,7 @@ body {
 <!-- Expert 4: Terry -->
                 <div class="expert-card">
                     <div class="headshot-placeholder">
-                        <a class="profile-link" href="https://terry.keynotesunlimited.com" aria-label="See Terry Britton's page: videos and more"><img src="terry-headshot-white.jpg" alt="Teresita Britton, PCC" class="headshot"></a>
+                        <a class="profile-link" href="https://terry.keynotesunlimited.com" aria-label="See Terry Britton's page: videos and more"><img src="terry-cut.webp" alt="Teresita Britton, PCC" class="headshot"></a>
                     </div>
                     <h3><a class="name-link" href="https://terry.keynotesunlimited.com">Terry Britton, PCC</a></h3>
                     <button class="more-toggle" type="button" aria-expanded="false">Read more <span aria-hidden="true">&#9662;</span></button>
@@ -689,7 +692,7 @@ body {
 <!-- Expert 3: Linda -->
                 <div class="expert-card">
                     <div class="headshot-placeholder">
-                        <a class="profile-link" href="https://linda.keynotesunlimited.com" aria-label="See Linda's page: videos and more"><img src="linda-headshot-white.jpg" alt="Linda Roszak Burton" class="headshot"></a>
+                        <a class="profile-link" href="https://linda.keynotesunlimited.com" aria-label="See Linda's page: videos and more"><img src="linda-cut.webp" alt="Linda Roszak Burton" class="headshot"></a>
                     </div>
                     <h3><a class="name-link" href="https://linda.keynotesunlimited.com">Linda Roszak Burton</a></h3>
                     <button class="more-toggle" type="button" aria-expanded="false">Read more <span aria-hidden="true">&#9662;</span></button>
