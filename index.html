@@ -102,7 +102,7 @@ body {
     position: relative;
     /* One size drives both the logo and the white band behind it (logo aspect ratio is 0.557) */
     --logo-w: min(26vw, 420px);
-    --band: calc(var(--logo-w) * 0.557 + 24px);
+    --band: calc(var(--logo-w) * 0.557 + 12px);
 }
 
 /* The logo is a transparent layer floating over the seam between Summer and Terry.
@@ -111,7 +111,7 @@ body {
     position: absolute;
     z-index: 5;
     left: 50%;
-    top: 28px;
+    top: 16px;
     width: var(--logo-w);
     height: auto;
     transform: translateX(-50%);
@@ -148,9 +148,9 @@ body {
     content: "";
     display: block;
     height: var(--band);
-    /* White space at the top, then the gradient darkens faster as it reaches the logo,
-       so the logo's dark edges melt into the background instead of bleeding on white */
-    background: linear-gradient(180deg, #ffffff 0%, #ffffff 6%, #dedcd7 14%, #8f8c85 24%, #2c2a26 34%, #0a0a09 44%, #000000 54%, #000000 100%);
+    /* Lightest where it meets the speakers, darkening upward and fully black by the top of the logo,
+       so the logo's dark edges melt into the background */
+    background: linear-gradient(0deg, #ffffff 0%, #cfcdc8 4%, #8c8982 9%, #4a4843 18%, #181715 32%, #000000 50%, #000000 100%);
 }
 
 .expert-card:hover {
