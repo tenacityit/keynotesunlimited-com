@@ -303,6 +303,10 @@ body {
     min-height: 0;
 }
 
+.services .more-toggle {
+    margin: 4px 0 0;
+}
+
 .more-toggle {
     display: block;
     margin: 0 25px 18px;
@@ -317,21 +321,27 @@ body {
 }
 
 .expert-card.open .card-more,
-.expert-card:focus-within .card-more {
+.expert-card:focus-within .card-more,
+.services.open .card-more,
+.services:focus-within .card-more {
     grid-template-rows: 1fr;
 }
 
 .expert-card.open .more-toggle,
-.expert-card:focus-within .more-toggle {
+.expert-card:focus-within .more-toggle,
+.services.open .more-toggle,
+.services:focus-within .more-toggle {
     display: none;
 }
 
 @media (hover: hover) {
-    .expert-card:hover .card-more {
+    .expert-card:hover .card-more,
+    .services:hover .card-more {
         grid-template-rows: 1fr;
     }
 
-    .expert-card:hover .more-toggle {
+    .expert-card:hover .more-toggle,
+    .services:hover .more-toggle {
         display: none;
     }
 }
@@ -347,6 +357,9 @@ body {
 }
 
 .services h2 {
+    font-family: 'Cinzel', 'Trajan Pro', Optima, Palatino, 'Palatino Linotype', serif;
+    font-weight: 500;
+    letter-spacing: 0.5px;
     font-size: 1.6rem;
     margin-bottom: 16px;
     color: var(--ink);
@@ -703,6 +716,8 @@ body {
                     <li>Practical strategies and useful tools</li>
                     <li>Engaging interaction</li>
                 </ul>
+                <button class="more-toggle" type="button" aria-expanded="false">Read more <span aria-hidden="true">&#9662;</span></button>
+                <div class="card-more"><div class="card-more-inner">
                 <p>Each speaker delivers thought-provoking ideas that capture attention and create lasting impact. They do it differently and they do it exceptionally well!</p>
                 <p>These are the experts if your audience needs:</p>
                 <ul>
@@ -713,6 +728,7 @@ body {
                     <li>To appropriately deal with the discomfort of change</li>
                 </ul>
                 <p>They bring content that’s relevant, memorable, and actionable. The goal is simple: your audience should leave not only inspired, but ready to do something differently.</p>
+                </div></div>
             </div>
         </section>
                 <section class="services coaching">
@@ -727,6 +743,8 @@ body {
                     <li>Refine and achieve professional goals</li>
                     <li>Lead with gravitas</li>
                 </ul>
+                <button class="more-toggle" type="button" aria-expanded="false">Read more <span aria-hidden="true">&#9662;</span></button>
+                <div class="card-more"><div class="card-more-inner">
                 <p>Through a focused, collaborative coaching experience, executives gain greater clarity, expand their capabilities, and develop the confidence to lead with intention and influence.</p>
                 <p>Whether you are stepping into a new leadership role, dealing with organizational change, or examining what your next level of success will be, executive coaching provides the support to help you lead at your very best.</p>
                 <p>Not only is there coaching for individuals, but also for teams and workgroups. This is the type of organizational support that builds bench strength throughout the enterprise.</p>
@@ -737,6 +755,7 @@ body {
                     <li>Spark innovation and entrepreneurial thinking</li>
                     <li>Enhance collaboration and outcomes</li>
                 </ul>
+                </div></div>
             </div>
         </section>
                 </div>
@@ -760,7 +779,7 @@ body {
     <script>
     document.addEventListener('click', function (e) {
         var t = e.target.closest('.more-toggle'); if (!t) return;
-        t.closest('.expert-card').classList.add('open'); t.setAttribute('aria-expanded', 'true');
+        t.closest('.expert-card, .services').classList.add('open'); t.setAttribute('aria-expanded', 'true');
     });
     document.addEventListener('click', function (e) {
             var b = e.target.closest('.yt-facade'); if (!b) return;
