@@ -101,8 +101,8 @@ body {
 .experts-stage {
     position: relative;
     /* One size drives both the logo and the white band behind it (logo aspect ratio is 0.557) */
-    --logo-w: min(22.5vw, 360px);
-    --band: calc(var(--logo-w) * 0.557 + 22px);
+    --logo-w: min(26vw, 420px);
+    --band: calc(var(--logo-w) * 0.557 + 24px);
 }
 
 /* The logo is a transparent layer floating over the seam between Summer and Terry.
@@ -111,7 +111,7 @@ body {
     position: absolute;
     z-index: 5;
     left: 50%;
-    top: 8px;
+    top: 28px;
     width: var(--logo-w);
     height: auto;
     transform: translateX(-50%);
@@ -494,7 +494,7 @@ body {
     }
 
     .experts-stage {
-        --logo-w: min(34vw, 340px);
+        --logo-w: min(40vw, 400px);
     }
 }
 
