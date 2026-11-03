@@ -100,6 +100,9 @@ body {
 
 .experts-stage {
     position: relative;
+    /* One size drives both the logo and the white band behind it (logo aspect ratio is 0.557) */
+    --logo-w: min(22.5vw, 360px);
+    --band: calc(var(--logo-w) * 0.557 + 22px);
 }
 
 /* The logo is a transparent layer floating over the seam between Summer and Terry.
@@ -108,12 +111,12 @@ body {
     position: absolute;
     z-index: 5;
     left: 50%;
-    top: min(14vw, 224px);
-    width: min(25vw, 400px);
+    top: 8px;
+    width: var(--logo-w);
     height: auto;
     transform: translateX(-50%);
     pointer-events: none;
-    filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.6)) drop-shadow(0 0 16px rgba(0, 0, 0, 0.35));
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.45));
 }
 
 .experts-grid {
@@ -138,6 +141,14 @@ body {
     border-radius: 0;
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+/* White band above each photo; the logo floats in it and crosses the seam */
+.expert-card::before {
+    content: "";
+    display: block;
+    height: var(--band);
+    background: var(--white);
 }
 
 .expert-card:hover {
@@ -482,9 +493,8 @@ body {
         grid-template-columns: repeat(2, 1fr);
     }
 
-    .float-logo {
-        top: 40vw;
-        width: min(34vw, 360px);
+    .experts-stage {
+        --logo-w: min(34vw, 340px);
     }
 }
 
@@ -513,6 +523,10 @@ body {
 
     .experts-grid {
         grid-template-columns: 1fr;
+    }
+
+    .expert-card::before {
+        display: none;
     }
 
     .float-logo {
