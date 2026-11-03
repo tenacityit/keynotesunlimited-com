@@ -298,6 +298,52 @@ body {
     justify-content: center;
 }
 
+
+/* Accordion: each speaker collapses to photo + name; hover, focus or tap expands the rest */
+.card-more {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.5s ease;
+}
+
+.card-more-inner {
+    overflow: hidden;
+    min-height: 0;
+}
+
+.more-toggle {
+    display: block;
+    margin: 0 25px 18px;
+    padding: 0;
+    border: 0;
+    background: none;
+    font: inherit;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--gold-800);
+    cursor: pointer;
+}
+
+.expert-card.open .card-more,
+.expert-card:focus-within .card-more {
+    grid-template-rows: 1fr;
+}
+
+.expert-card.open .more-toggle,
+.expert-card:focus-within .more-toggle {
+    display: none;
+}
+
+@media (hover: hover) {
+    .expert-card:hover .card-more {
+        grid-template-rows: 1fr;
+    }
+
+    .expert-card:hover .more-toggle {
+        display: none;
+    }
+}
+
 /* Services Sections */
 .services {
     margin-bottom: 0;
@@ -485,6 +531,8 @@ body {
                         <a class="profile-link" href="https://joanne.keynotesunlimited.com" aria-label="See Joanne L. Smikle's page: videos, podcast and more"><img src="joanne-headshot.jpg" alt="Joanne L. Smikle, PhD" class="headshot"></a>
                     </div>
                     <h3><a class="name-link" href="https://joanne.keynotesunlimited.com">Joanne L. Smikle, PhD</a></h3>
+                    <button class="more-toggle" type="button" aria-expanded="false">Read more <span aria-hidden="true">&#9662;</span></button>
+                    <div class="card-more"><div class="card-more-inner">
                     <p class="bio">Dr. Joanne L. Smikle, a respected authority on leadership and organization development, provides keynotes, workshops, and retreats. She prepares leaders for an ever-evolving world.</p>
                     <h4>Why select Joanne?</h4>
                     <ul class="bio-list">
@@ -511,6 +559,7 @@ body {
                             <source src="video/demo-reel-a.mp4" type="video/mp4">
                         </video>
                     </div>
+                    </div></div>
                 </div>
 
 <!-- Expert 2: Summer -->
@@ -519,6 +568,8 @@ body {
                         <a class="profile-link" href="https://summer.keynotesunlimited.com" aria-label="See Summer Jelinek's page: videos, podcast and more"><img src="summer-headshot.jpg" alt="Summer Jelinek" class="headshot"></a>
                     </div>
                     <h3><a class="name-link" href="https://summer.keynotesunlimited.com">Summer Jelinek</a></h3>
+                    <button class="more-toggle" type="button" aria-expanded="false">Read more <span aria-hidden="true">&#9662;</span></button>
+                    <div class="card-more"><div class="card-more-inner">
                     <p class="bio">Summer Jelinek is a leadership keynote speaker, consultant, and educator with more than two decades of leadership experience at organizations including Walt Disney World, the Disney Institute, H-E-B/Central Market, and the Center for Creative Leadership.</p>
                     <p class="bio">She is the creator of the M.A.G.I.C. model for leadership, a practical framework addressing:</p>
                     <ul class="bio-list">
@@ -548,6 +599,7 @@ body {
                     <div class="video-embed">
                         <button class="yt-facade" type="button" data-id="56LHLCRSTec" data-title="Summer Jelinek speaker reel" aria-label="Play: Summer Jelinek speaker reel"><img src="https://i.ytimg.com/vi/56LHLCRSTec/maxresdefault.jpg" alt=""><span class="play-btn">&#9654;</span></button>
                     </div>
+                    </div></div>
                 </div>
 
 <!-- Expert 4: Terry -->
@@ -556,6 +608,8 @@ body {
                         <a class="profile-link" href="https://terry.keynotesunlimited.com" aria-label="See Terry Britton's page: videos and more"><img src="terry-headshot.jpg" alt="Teresita Britton, PCC" class="headshot"></a>
                     </div>
                     <h3><a class="name-link" href="https://terry.keynotesunlimited.com">Teresita “Terry” Britton, PCC</a></h3>
+                    <button class="more-toggle" type="button" aria-expanded="false">Read more <span aria-hidden="true">&#9662;</span></button>
+                    <div class="card-more"><div class="card-more-inner">
                     <p class="bio">Teresita “Terry” Britton, PCC, is an executive coach and organizational development consultant who guides leaders and organizations through change. Her experience is extensive. For more than 20 years she has:</p>
                     <ul class="bio-list">
                         <li>Designed and facilitated leadership programs, retreats, and workshops</li>
@@ -588,6 +642,7 @@ body {
                     <div class="video-embed">
                         <iframe src="https://www.youtube-nocookie.com/embed/iX6jLIkvFfA?rel=0" title="Terry Britton: Leadership Solutions" loading="lazy" allow="accelerometer; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>
                     </div>
+                    </div></div>
                 </div>
 
 
@@ -597,6 +652,8 @@ body {
                         <a class="profile-link" href="https://linda.keynotesunlimited.com" aria-label="See Linda's page: videos and more"><img src="linda-headshot.jpg" alt="Linda Roszak Burton" class="headshot"></a>
                     </div>
                     <h3><a class="name-link" href="https://linda.keynotesunlimited.com">Linda Roszak Burton</a></h3>
+                    <button class="more-toggle" type="button" aria-expanded="false">Read more <span aria-hidden="true">&#9662;</span></button>
+                    <div class="card-more"><div class="card-more-inner">
                     <p class="bio">Linda Roszak Burton is a respected authority on strengths and evidence-based leadership development, researcher, author, keynote speaker, and board-certified health and well-being coach.</p>
                     <h4>Why select Linda?</h4>
                     <ul class="bio-list">
@@ -624,6 +681,7 @@ body {
                     <div class="video-embed">
                         <iframe src="https://www.youtube-nocookie.com/embed/paXMGo8cHSo?rel=0" title="Linda Roszak Burton TEDx talk: Gratitude, The Power to Heal the World" loading="lazy" allow="accelerometer; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>
                     </div>
+                    </div></div>
                 </div>
             </div>
 
@@ -694,6 +752,10 @@ body {
         </footer>
     </div>
     <script>
+    document.addEventListener('click', function (e) {
+        var t = e.target.closest('.more-toggle'); if (!t) return;
+        t.closest('.expert-card').classList.add('open'); t.setAttribute('aria-expanded', 'true');
+    });
     document.addEventListener('click', function (e) {
             var b = e.target.closest('.yt-facade'); if (!b) return;
             var f = document.createElement('iframe');
