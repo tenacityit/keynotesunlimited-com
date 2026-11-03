@@ -116,7 +116,7 @@ body {
     height: auto;
     transform: translateX(-50%);
     pointer-events: none;
-    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.45));
+    filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.5));
 }
 
 .experts-grid {
@@ -148,7 +148,9 @@ body {
     content: "";
     display: block;
     height: var(--band);
-    background: var(--white);
+    /* White space at the top, then the gradient darkens faster as it reaches the logo,
+       so the logo's dark edges melt into the background instead of bleeding on white */
+    background: linear-gradient(180deg, #ffffff 0%, #ffffff 6%, #dedcd7 14%, #8f8c85 24%, #2c2a26 34%, #0a0a09 44%, #000000 54%, #000000 100%);
 }
 
 .expert-card:hover {
