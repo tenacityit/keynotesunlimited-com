@@ -119,8 +119,12 @@ def cut(name, source, backdrop):
     solid_img = Image.fromarray((subject * 255).astype("uint8")).filter(ImageFilter.MinFilter(5))
     solid = np.array(solid_img) > 127
     rgb = decontaminate(np.array(im), solid, rings=5)
-    alpha = Image.fromarray((subject * 255).astype("uint8")).filter(ImageFilter.MinFilter(3))
-    alpha = alpha.filter(ImageFilter.GaussianBlur(0.9))
+    # diffuse the edge: pull it in a touch more, then a wide feather so stray specks
+    # around the hair dissolve into the gradient instead of showing as artifacts
+    # (scaled to the source resolution, so low-res photos aren't over-blurred)
+    scale = im.width / 800
+    alpha = Image.fromarray((subject * 255).astype("uint8")).filter(ImageFilter.MinFilter(5 if scale >= 1 else 3))
+    alpha = alpha.filter(ImageFilter.GaussianBlur(max(1.3, 2.2 * scale)))
     rgba = Image.fromarray(np.dstack([rgb, np.array(alpha)]), "RGBA")
     if rgba.width > OUT_WIDTH:
         rgba = rgba.resize((OUT_WIDTH, round(rgba.height * OUT_WIDTH / rgba.width)), Image.LANCZOS)
