@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Keynotes and Coaching Unlimited | Expert Speakers & Coaches</title>
     <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
     <style>
 :root {
     /* Black: sampled from her logo background */
@@ -37,122 +40,119 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     line-height: 1.6;
     color: var(--ink);
-    background-color: var(--paper);
+    background-color: var(--black);
 }
 
 .container {
     position: relative;
     z-index: 1;
-    max-width: 1200px;
+    max-width: 1600px;
     margin: 0 auto;
     padding: 0 20px;
-}
-
-/* Watermark: faint grey headshots tiled as diamonds over the whole page.
-   It sits behind the content, so the logo panel and headshots stay clean. */
-.watermark {
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    overflow: hidden;
-    pointer-events: none;
-    opacity: 0.07;
-    filter: grayscale(1) contrast(1.1);
-    mix-blend-mode: multiply;
-}
-
-.watermark span {
-    position: absolute;
-    width: 170px;
-    height: 170px;
-    background-size: cover;
-    background-position: center 20%;
-    clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
 }
 
 /* Hero Section */
 .hero {
     background: var(--black);
     color: var(--ivory);
-    padding: 36px 40px 50px;
+    padding: 20px 20px 24px;
     text-align: center;
-    margin: 20px 0 60px;
-    border-radius: 8px;
+    margin: 0;
+}
+
+.hero.intro {
+    padding: 28px 20px 60px;
+    margin-bottom: 40px;
     border-bottom: 4px solid var(--gold-500);
 }
 
-.hero-logo {
-    display: block;
-    width: min(340px, 70%);
-    height: auto;
-    margin: 0 auto 24px;
-    mix-blend-mode: screen;
-}
-
 .hero h1 {
-    font-size: 2.4rem;
-    margin-bottom: 16px;
-    font-weight: 700;
-    letter-spacing: -1px;
-    color: var(--gold-300);
+    font-family: 'Cinzel', 'Trajan Pro', Optima, Palatino, 'Palatino Linotype', serif;
+    font-size: 3.2rem;
+    margin-bottom: 18px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    line-height: 1.1;
+    color: var(--gold-500);
+    /* Polished-gold fill with a bright top, a dark horizon band and a warm lower glow, like the logo */
+    background: linear-gradient(180deg, #fff3b8 0%, #f1cf6a 22%, #c9a13b 44%, #7a5a14 52%, #b98c2c 62%, #f0d27a 82%, #c9a13b 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    /* Stacked hard shadows build the extruded edge; the soft one lifts it off the black */
+    filter: drop-shadow(0 1px 0 #8a6414) drop-shadow(0 2px 0 #5a410d) drop-shadow(0 5px 6px rgba(0, 0, 0, 0.85)) drop-shadow(0 0 14px rgba(232, 199, 102, 0.28));
 }
 
 .hero .tagline {
-    font-size: 1.15rem;
-    max-width: 800px;
+    font-family: 'Cormorant Garamond', Palatino, 'Palatino Linotype', Georgia, serif;
+    font-size: 1.55rem;
+    max-width: 1100px;
     margin: 0 auto;
     line-height: 1.45;
-    font-weight: 300;
+    font-weight: 500;
     font-style: italic;
 }
 
 /* Experts Section */
 .experts {
-    margin-bottom: 80px;
+    margin-bottom: 0;
 }
 
-.experts h2 {
-    font-size: 2.5rem;
-    margin-bottom: 50px;
-    text-align: center;
-    color: var(--ink);
+.experts-stage {
+    position: relative;
+    /* One size drives both the logo and the white band behind it (logo aspect ratio is 0.557) */
+    --logo-w: min(26vw, 420px);
+    --band: calc(var(--logo-w) * 0.557 + 12px);
+    --g-mid: #5a5751;
 }
 
-.experts h2::after {
-    content: "\25C6";
-    display: block;
-    margin-top: 6px;
-    font-size: 3rem;
-    line-height: 1;
-    color: var(--gold-500);
+/* The logo is a transparent layer floating over the seam between Summer and Terry.
+   pointer-events: none keeps the hover accordion working underneath it. */
+.float-logo {
+    position: absolute;
+    z-index: 5;
+    left: 50%;
+    top: 16px;
+    width: var(--logo-w);
+    height: auto;
+    transform: translateX(-50%);
+    pointer-events: none;
+    filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.5));
 }
 
 .experts-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 40px;
-    margin-bottom: 60px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+    margin-bottom: 0;
     align-items: start;
 }
 
 .services-stack {
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-}
-
-.expert-card.col-right {
-    grid-column: 3;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    align-items: start;
 }
 
 .expert-card {
     background: rgba(255, 255, 255, 0.88);
     border: 1px solid var(--line);
     border-top: 4px solid var(--gold-500);
-    border-radius: 8px;
+    border-radius: 0;
     overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
     transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+/* White band above each photo; the logo floats in it and crosses the seam */
+.expert-card::before {
+    content: "";
+    display: block;
+    height: var(--band);
+    margin-bottom: -1px;   /* overlap by a pixel so no hairline shows at the join */
+    /* Top half of one continuous gradient: black behind the logo, easing to --g-mid where
+       the photo area picks up (see .headshot-placeholder) */
+    background: linear-gradient(0deg, var(--g-mid) 0%, #3d3b37 10%, #161513 30%, #000000 55%, #000000 100%);
 }
 
 .expert-card:hover {
@@ -165,7 +165,8 @@ body {
 .headshot-placeholder {
     width: 100%;
     aspect-ratio: 4 / 5;
-    background-color: var(--paper);
+    /* Gradient behind the speakers: continues from the band and lightens down the photo */
+    background: linear-gradient(180deg, var(--g-mid) 0%, #8f8c86 20%, #bebcb7 42%, #e2e1de 68%, #ffffff 100%);
     overflow: hidden;
 }
 
@@ -178,7 +179,11 @@ body {
 }
 
 .expert-card h3 {
-    font-size: 1.5rem;
+    font-family: 'Cinzel', 'Trajan Pro', Optima, Palatino, 'Palatino Linotype', serif;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    line-height: 1.25;
+    font-size: 1.3rem;
     padding: 25px 25px 10px;
     color: var(--ink);
 }
@@ -301,6 +306,62 @@ body {
     justify-content: center;
 }
 
+
+/* Accordion: each speaker collapses to photo + name; hover, focus or tap expands the rest */
+.card-more {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.5s ease;
+}
+
+.card-more-inner {
+    overflow: hidden;
+    min-height: 0;
+}
+
+.services .more-toggle {
+    margin: 4px 0 0;
+}
+
+.more-toggle {
+    display: block;
+    margin: 0 25px 18px;
+    padding: 0;
+    border: 0;
+    background: none;
+    font: inherit;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--gold-800);
+    cursor: pointer;
+}
+
+.expert-card.open .card-more,
+.expert-card:focus-within .card-more,
+.services.open .card-more,
+.services:focus-within .card-more {
+    grid-template-rows: 1fr;
+}
+
+.expert-card.open .more-toggle,
+.expert-card:focus-within .more-toggle,
+.services.open .more-toggle,
+.services:focus-within .more-toggle {
+    display: none;
+}
+
+@media (hover: hover) {
+    .expert-card:hover .card-more,
+    .services:hover .card-more {
+        grid-template-rows: 1fr;
+    }
+
+    .expert-card:hover .more-toggle,
+    .services:hover .more-toggle {
+        display: none;
+    }
+}
+
 /* Services Sections */
 .services {
     margin-bottom: 0;
@@ -312,6 +373,9 @@ body {
 }
 
 .services h2 {
+    font-family: 'Cinzel', 'Trajan Pro', Optima, Palatino, 'Palatino Linotype', serif;
+    font-weight: 500;
+    letter-spacing: 0.5px;
     font-size: 1.6rem;
     margin-bottom: 16px;
     color: var(--ink);
@@ -363,16 +427,20 @@ body {
 }
 
 .signature .contact {
+    font-family: 'Cinzel', 'Trajan Pro', Optima, Palatino, 'Palatino Linotype', serif;
+    font-weight: 500;
+    letter-spacing: 1px;
     margin-bottom: 8px;
     font-size: 1.05rem;
     color: var(--gold-300);
 }
 
 .signature .statement {
-    font-size: 1.2rem;
-    line-height: 1.4;
+    font-family: 'Cormorant Garamond', Palatino, 'Palatino Linotype', Georgia, serif;
+    font-size: 1.6rem;
+    line-height: 1.35;
     margin-bottom: 30px;
-    font-weight: 300;
+    font-weight: 500;
     font-style: italic;
 }
 
@@ -384,25 +452,33 @@ body {
 }
 
 .signature .cta p {
-    font-size: 1.15rem;
+    font-family: 'Cormorant Garamond', Palatino, 'Palatino Linotype', Georgia, serif;
+    font-weight: 600;
+    font-size: 1.4rem;
     line-height: 1.4;
     margin-bottom: 8px;
 }
 
 .signature .cta .cta-lead {
-    font-size: 1.35rem;
-    font-weight: 600;
+    font-family: 'Cinzel', 'Trajan Pro', Optima, Palatino, 'Palatino Linotype', serif;
+    font-size: 1.2rem;
+    letter-spacing: 0.5px;
+    font-weight: 500;
     color: var(--gold-300);
 }
 
 .signature .cta .cta-close {
+    font-family: 'Cinzel', 'Trajan Pro', Optima, Palatino, 'Palatino Linotype', serif;
     margin-top: 18px;
-    font-size: 1.3rem;
-    font-weight: 600;
+    font-size: 1.2rem;
+    letter-spacing: 0.5px;
+    font-weight: 500;
     color: var(--gold-300);
 }
 
 .signature .domains {
+    font-family: 'Cinzel', 'Trajan Pro', Optima, Palatino, 'Palatino Linotype', serif;
+    letter-spacing: 1px;
     font-size: 1.1rem;
 }
 
@@ -417,9 +493,13 @@ body {
 }
 
 /* Responsive */
-@media (max-width: 980px) {
-    .expert-card.col-right {
-        grid-column: auto;
+@media (max-width: 1100px) {
+    .experts-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .experts-stage {
+        --logo-w: min(40vw, 400px);
     }
 }
 
@@ -430,21 +510,41 @@ body {
     }
 
     .hero h1 {
-        font-size: 1.9rem;
+        font-size: 2rem;
     }
 
     .hero .tagline {
-        font-size: 1.05rem;
+        font-size: 1.2rem;
     }
 
-    .experts h2,
     .services h2 {
         font-size: 1.8rem;
     }
 
-    .experts-grid {
+    .services-stack {
         grid-template-columns: 1fr;
         gap: 30px;
+    }
+
+    .experts-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .expert-card::before {
+        display: none;
+    }
+
+    .float-logo {
+        position: static;
+        display: block;
+        width: min(260px, 70%);
+        margin: 16px auto;
+        transform: none;
+        filter: none;
+    }
+
+    .experts-grid {
+        margin-bottom: 30px;
     }
 
     .services {
@@ -456,33 +556,26 @@ body {
     }
 
     .signature .statement {
-        font-size: 1rem;
+        font-size: 1.3rem;
     }
 }
     </style>
 </head>
 <body>
-    <div class="watermark" aria-hidden="true"></div>
     <div class="container">
-        <!-- Hero Section -->
-        <header class="hero">
-            <div class="hero-content">
-                <img class="hero-logo" src="logo.jpg" alt="Keynotes and Coaching Unlimited">
-                <h1>Elevate Your Next Event</h1>
-                <p class="tagline">Elevate your next event with a captivating, action-oriented keynote. Elevate your career trajectory with curated coaching. Four nationally respected experts are available to provide both services.</p>
-            </div>
-        </header>
-
         <!-- Experts Grid -->
         <section class="experts">
-            <h2>Our Experts</h2>
+            <div class="experts-stage">
+            <img class="float-logo" src="logo-float.png" alt="Keynotes and Coaching Unlimited">
             <div class="experts-grid">
 <!-- Expert 1: Joanne -->
                 <div class="expert-card">
                     <div class="headshot-placeholder">
-                        <a class="profile-link" href="https://joanne.keynotesunlimited.com" aria-label="See Joanne L. Smikle's page: videos, podcast and more"><img src="joanne-headshot.jpg" alt="Joanne L. Smikle, PhD" class="headshot"></a>
+                        <a class="profile-link" href="https://joanne.keynotesunlimited.com" aria-label="See Joanne L. Smikle's page: videos, podcast and more"><img src="joanne-cut.webp" alt="Joanne L. Smikle, PhD" class="headshot"></a>
                     </div>
                     <h3><a class="name-link" href="https://joanne.keynotesunlimited.com">Joanne L. Smikle, PhD</a></h3>
+                    <button class="more-toggle" type="button" aria-expanded="false">Read more <span aria-hidden="true">&#9662;</span></button>
+                    <div class="card-more"><div class="card-more-inner">
                     <p class="bio">Dr. Joanne L. Smikle, a respected authority on leadership and organization development, provides keynotes, workshops, and retreats. She prepares leaders for an ever-evolving world.</p>
                     <h4>Why select Joanne?</h4>
                     <ul class="bio-list">
@@ -509,63 +602,17 @@ body {
                             <source src="video/demo-reel-a.mp4" type="video/mp4">
                         </video>
                     </div>
-                </div>
-
-                <div class="services-stack">
-                <!-- Keynotes and Coaching, stacked between Joanne and Summer -->
-                <section class="services keynotes">
-            <h2>Keynotes</h2>
-            <div class="service-content">
-                <p>A great keynote does more than fill a stage. It fills the room with energy, insight, and expanded possibilities. Count on these speakers for:</p>
-                <ul>
-                    <li>Powerful storytelling</li>
-                    <li>Practical strategies and useful tools</li>
-                    <li>Engaging interaction</li>
-                </ul>
-                <p>Each speaker delivers thought-provoking ideas that capture attention and create lasting impact. They do it differently and they do it exceptionally well!</p>
-                <p>These are the experts if your audience needs:</p>
-                <ul>
-                    <li>To strengthen leadership competence and confidence</li>
-                    <li>To elevate performance and ramp up productivity</li>
-                    <li>To step confidently into their next chapter</li>
-                    <li>To understand strategy and make it come to life</li>
-                    <li>To appropriately deal with the discomfort of change</li>
-                </ul>
-                <p>They bring content that’s relevant, memorable, and actionable. The goal is simple: your audience should leave not only inspired, but ready to do something differently.</p>
-            </div>
-        </section>
-                <section class="services coaching">
-            <h2>Coaching</h2>
-            <div class="service-content">
-                <p>Exceptional leaders are always growing, evolving, and finding new ways to create meaningful impact. A great coach provides personalized guidance, honest perspective, and practical strategies designed to help leaders maximize their impact.</p>
-                <p>Each coach approaches the assignment differently, based on their unique style. Yet they all will help you…</p>
-                <ul>
-                    <li>Assess your trajectory</li>
-                    <li>Navigate challenging situations</li>
-                    <li>Understand the nuances of organizational politics</li>
-                    <li>Refine and achieve professional goals</li>
-                    <li>Lead with gravitas</li>
-                </ul>
-                <p>Through a focused, collaborative coaching experience, executives gain greater clarity, expand their capabilities, and develop the confidence to lead with intention and influence.</p>
-                <p>Whether you are stepping into a new leadership role, dealing with organizational change, or examining what your next level of success will be, executive coaching provides the support to help you lead at your very best.</p>
-                <p>Not only is there coaching for individuals, but also for teams and workgroups. This is the type of organizational support that builds bench strength throughout the enterprise.</p>
-                <p>Use it to…</p>
-                <ul>
-                    <li>Improve team dynamics</li>
-                    <li>Build more effective processes</li>
-                    <li>Spark innovation and entrepreneurial thinking</li>
-                    <li>Enhance collaboration and outcomes</li>
-                </ul>
-            </div>
-        </section>
+                    </div></div>
                 </div>
 
 <!-- Expert 2: Summer -->
                 <div class="expert-card">
                     <div class="headshot-placeholder">
-                        <a class="profile-link" href="https://summer.keynotesunlimited.com" aria-label="See Summer Jelinek's page: videos, podcast and more"><img src="summer-headshot.jpg" alt="Summer Jelinek" class="headshot"></a>
+                        <a class="profile-link" href="https://summer.keynotesunlimited.com" aria-label="See Summer Jelinek's page: videos, podcast and more"><img src="summer-cut.webp" alt="Summer Jelinek" class="headshot"></a>
                     </div>
                     <h3><a class="name-link" href="https://summer.keynotesunlimited.com">Summer Jelinek</a></h3>
+                    <button class="more-toggle" type="button" aria-expanded="false">Read more <span aria-hidden="true">&#9662;</span></button>
+                    <div class="card-more"><div class="card-more-inner">
                     <p class="bio">Summer Jelinek is a leadership keynote speaker, consultant, and educator with more than two decades of leadership experience at organizations including Walt Disney World, the Disney Institute, H-E-B/Central Market, and the Center for Creative Leadership.</p>
                     <p class="bio">She is the creator of the M.A.G.I.C. model for leadership, a practical framework addressing:</p>
                     <ul class="bio-list">
@@ -595,14 +642,17 @@ body {
                     <div class="video-embed">
                         <button class="yt-facade" type="button" data-id="56LHLCRSTec" data-title="Summer Jelinek speaker reel" aria-label="Play: Summer Jelinek speaker reel"><img src="https://i.ytimg.com/vi/56LHLCRSTec/maxresdefault.jpg" alt=""><span class="play-btn">&#9654;</span></button>
                     </div>
+                    </div></div>
                 </div>
 
 <!-- Expert 4: Terry -->
                 <div class="expert-card">
                     <div class="headshot-placeholder">
-                        <a class="profile-link" href="https://terry.keynotesunlimited.com" aria-label="See Terry Britton's page: videos and more"><img src="terry-headshot.jpg" alt="Teresita Britton, PCC" class="headshot"></a>
+                        <a class="profile-link" href="https://terry.keynotesunlimited.com" aria-label="See Terry Britton's page: videos and more"><img src="terry-cut.webp" alt="Teresita Britton, PCC" class="headshot"></a>
                     </div>
-                    <h3><a class="name-link" href="https://terry.keynotesunlimited.com">Teresita “Terry” Britton, PCC</a></h3>
+                    <h3><a class="name-link" href="https://terry.keynotesunlimited.com">Terry Britton, PCC</a></h3>
+                    <button class="more-toggle" type="button" aria-expanded="false">Read more <span aria-hidden="true">&#9662;</span></button>
+                    <div class="card-more"><div class="card-more-inner">
                     <p class="bio">Teresita “Terry” Britton, PCC, is an executive coach and organizational development consultant who guides leaders and organizations through change. Her experience is extensive. For more than 20 years she has:</p>
                     <ul class="bio-list">
                         <li>Designed and facilitated leadership programs, retreats, and workshops</li>
@@ -635,15 +685,18 @@ body {
                     <div class="video-embed">
                         <iframe src="https://www.youtube-nocookie.com/embed/iX6jLIkvFfA?rel=0" title="Terry Britton: Leadership Solutions" loading="lazy" allow="accelerometer; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>
                     </div>
+                    </div></div>
                 </div>
 
 
 <!-- Expert 3: Linda -->
-                <div class="expert-card col-right">
+                <div class="expert-card">
                     <div class="headshot-placeholder">
-                        <a class="profile-link" href="https://linda.keynotesunlimited.com" aria-label="See Linda's page: videos and more"><img src="linda-headshot.jpg" alt="Linda Roszak Burton" class="headshot"></a>
+                        <a class="profile-link" href="https://linda.keynotesunlimited.com" aria-label="See Linda's page: videos and more"><img src="linda-cut.webp" alt="Linda Roszak Burton" class="headshot"></a>
                     </div>
                     <h3><a class="name-link" href="https://linda.keynotesunlimited.com">Linda Roszak Burton</a></h3>
+                    <button class="more-toggle" type="button" aria-expanded="false">Read more <span aria-hidden="true">&#9662;</span></button>
+                    <div class="card-more"><div class="card-more-inner">
                     <p class="bio">Linda Roszak Burton is a respected authority on strengths and evidence-based leadership development, researcher, author, keynote speaker, and board-certified health and well-being coach.</p>
                     <h4>Why select Linda?</h4>
                     <ul class="bio-list">
@@ -671,8 +724,72 @@ body {
                     <div class="video-embed">
                         <iframe src="https://www.youtube-nocookie.com/embed/paXMGo8cHSo?rel=0" title="Linda Roszak Burton TEDx talk: Gratitude, The Power to Heal the World" loading="lazy" allow="accelerometer; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>
                     </div>
+                    </div></div>
                 </div>
             </div>
+            </div>
+
+        <!-- Intro, below the pictures -->
+        <section class="hero intro">
+            <h1>Elevate Your Next Event</h1>
+            <p class="tagline">Elevate your next event with a captivating, action-oriented keynote. Elevate your career trajectory with curated coaching. Four nationally respected experts are available to provide both services.</p>
+        </section>
+
+            <!-- Keynotes and Coaching, two even columns below the speakers -->
+                <div class="services-stack">
+                
+                <section class="services keynotes">
+            <h2>Keynotes</h2>
+            <div class="service-content">
+                <p>A great keynote does more than fill a stage. It fills the room with energy, insight, and expanded possibilities. Count on these speakers for:</p>
+                <ul>
+                    <li>Powerful storytelling</li>
+                    <li>Practical strategies and useful tools</li>
+                    <li>Engaging interaction</li>
+                </ul>
+                <button class="more-toggle" type="button" aria-expanded="false">Read more <span aria-hidden="true">&#9662;</span></button>
+                <div class="card-more"><div class="card-more-inner">
+                <p>Each speaker delivers thought-provoking ideas that capture attention and create lasting impact. They do it differently and they do it exceptionally well!</p>
+                <p>These are the experts if your audience needs:</p>
+                <ul>
+                    <li>To strengthen leadership competence and confidence</li>
+                    <li>To elevate performance and ramp up productivity</li>
+                    <li>To step confidently into their next chapter</li>
+                    <li>To understand strategy and make it come to life</li>
+                    <li>To appropriately deal with the discomfort of change</li>
+                </ul>
+                <p>They bring content that’s relevant, memorable, and actionable. The goal is simple: your audience should leave not only inspired, but ready to do something differently.</p>
+                </div></div>
+            </div>
+        </section>
+                <section class="services coaching">
+            <h2>Coaching</h2>
+            <div class="service-content">
+                <p>Exceptional leaders are always growing, evolving, and finding new ways to create meaningful impact. A great coach provides personalized guidance, honest perspective, and practical strategies designed to help leaders maximize their impact.</p>
+                <p>Each coach approaches the assignment differently, based on their unique style. Yet they all will help you…</p>
+                <ul>
+                    <li>Assess your trajectory</li>
+                    <li>Navigate challenging situations</li>
+                    <li>Understand the nuances of organizational politics</li>
+                    <li>Refine and achieve professional goals</li>
+                    <li>Lead with gravitas</li>
+                </ul>
+                <button class="more-toggle" type="button" aria-expanded="false">Read more <span aria-hidden="true">&#9662;</span></button>
+                <div class="card-more"><div class="card-more-inner">
+                <p>Through a focused, collaborative coaching experience, executives gain greater clarity, expand their capabilities, and develop the confidence to lead with intention and influence.</p>
+                <p>Whether you are stepping into a new leadership role, dealing with organizational change, or examining what your next level of success will be, executive coaching provides the support to help you lead at your very best.</p>
+                <p>Not only is there coaching for individuals, but also for teams and workgroups. This is the type of organizational support that builds bench strength throughout the enterprise.</p>
+                <p>Use it to…</p>
+                <ul>
+                    <li>Improve team dynamics</li>
+                    <li>Build more effective processes</li>
+                    <li>Spark innovation and entrepreneurial thinking</li>
+                    <li>Enhance collaboration and outcomes</li>
+                </ul>
+                </div></div>
+            </div>
+        </section>
+                </div>
         </section>
 
 <!-- Signature Footer -->
@@ -692,6 +809,10 @@ body {
     </div>
     <script>
     document.addEventListener('click', function (e) {
+        var t = e.target.closest('.more-toggle'); if (!t) return;
+        t.closest('.expert-card, .services').classList.add('open'); t.setAttribute('aria-expanded', 'true');
+    });
+    document.addEventListener('click', function (e) {
             var b = e.target.closest('.yt-facade'); if (!b) return;
             var f = document.createElement('iframe');
             f.src = 'https://www.youtube-nocookie.com/embed/' + b.dataset.id + '?autoplay=1&rel=0&modestbranding=1&playsinline=1&iv_load_policy=3';
@@ -699,26 +820,6 @@ body {
             b.replaceWith(f);
         });
 
-    // Tile the page with faint diamond headshots (a watermark). Rebuilds on resize.
-    (function () {
-        var photos = ['joanne-1', 'summer', 'terry', 'joanne-4', 'linda', 'joanne-6', 'joanne-2', 'terry', 'joanne-5', 'joanne-3']
-            .map(function (n) { return 'backdrop/' + n + '.jpg'; });
-        var D = 170, box = document.querySelector('.watermark');
-        function build() {
-            var w = window.innerWidth, h = window.innerHeight, html = '';
-            var rows = Math.ceil(h / (D / 2)) + 2, cols = Math.ceil(w / D) + 2;
-            for (var r = 0; r < rows; r++) {
-                for (var c = 0; c < cols; c++) {
-                    var x = c * D + (r % 2 ? D / 2 : 0) - D / 2, y = r * (D / 2) - D / 2;
-                    var img = photos[(c * 3 + r * 5) % photos.length];
-                    html += '<span style="left:' + x + 'px;top:' + y + 'px;background-image:url(' + img + ')"></span>';
-                }
-            }
-            box.innerHTML = html;
-        }
-        var t; window.addEventListener('resize', function () { clearTimeout(t); t = setTimeout(build, 150); });
-        build();
-    })();
     </script>
 </body>
 </html>
